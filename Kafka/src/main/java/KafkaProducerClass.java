@@ -29,11 +29,11 @@ public class KafkaProducerClass {
         if(temp.length()==16) temp=temp+"0";
         long starTime=Long.parseLong(temp);
         LogConfig.initLog();
-        Producer<String, String> producer1 = ProducerFactory.getProducer("172.31.74.50","9092");
-        Producer<String, String> producer2 = ProducerFactory.getProducer("172.31.74.50","9093");
-        Producer<String, String> producer3 = ProducerFactory.getProducer("172.31.74.50","9094");
+        Producer<String, String> producer1 = ProducerFactory.getProducer("172.19.115.208","9092");
+        Producer<String, String> producer2 = ProducerFactory.getProducer("172.19.115.208","9093");
+        Producer<String, String> producer3 = ProducerFactory.getProducer("172.19.115.208","9094");
 
-        for(int i=0;i<200;i+=3){
+        for(int i=0;i<259;i+=3){
             //kafkaProducer1
             String filePath = "D:\\2大学\\大三下\\数据集成\\作业\\hw2\\data\\common\\"+(i)+".txt";
             FileInputStream fin = new FileInputStream(filePath);
@@ -50,9 +50,9 @@ public class KafkaProducerClass {
                 if(time1.length()==16) time1=time1+"0";
                 long curTime = Long.parseLong(time1);
                 long timeDiff = curTime - starTime;
-                if(timeDiff>10000){
+                if(timeDiff>30000){
                     System.out.println("yes");
-                    long speed = count/timeDiff*1000;
+                    long speed = count* 1000L /timeDiff;
                     starTime = curTime;
                     count=0;
                     //clickhouse
@@ -87,7 +87,7 @@ public class KafkaProducerClass {
                 if(time1.length()==16) time1=time1+"0";
                 long curTime = Long.parseLong(time1);
                 long timeDiff = curTime - starTime;
-                if(timeDiff>10000){
+                if(timeDiff>30000){
                     System.out.println("yes");
                     long speed = count/timeDiff*1000;
                     starTime = curTime;
@@ -124,7 +124,7 @@ public class KafkaProducerClass {
                 if(time1.length()==16) time1=time1+"0";
                 long curTime = Long.parseLong(time1);
                 long timeDiff = curTime - starTime;
-                if(timeDiff>10000){
+                if(timeDiff>30000){
                     System.out.println("yes");
                     long speed = count/timeDiff*1000;
                     starTime = curTime;

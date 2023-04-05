@@ -48,7 +48,7 @@ public class KafkaConsumerApp {
 			//set the environment of flink
 			StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 			Properties properties = new Properties();
-			properties.setProperty("bootstrap.servers", "172.31.74.50:9092");
+			properties.setProperty("bootstrap.servers", "172.19.115.208:9092");
 			properties.setProperty("group.id", "flink");
 			Map<String, String> globalParameters = new HashMap<>();
 			// ClickHouse cluster properties
@@ -148,9 +148,10 @@ public class KafkaConsumerApp {
 					if(time1.length()==16) time1=time1+"0";
 					long curTime = Long.parseLong(time1);
 					long timeDiff = curTime - starTime[0];
+					System.out.println(curTime +" "+timeDiff);
 					//每3秒钟统计一次
 					if(timeDiff>3000){
-						long speed = (long)((double)count[1]/(double) timeDiff)*1000;
+						long speed = count[1]* 1000L /timeDiff;
 						starTime[0] = curTime;
 						count[1] = 0;
 						//clickhouse
